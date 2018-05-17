@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
 
 class Deck extends Component {
   constructor(props) {
@@ -22,7 +23,13 @@ class Deck extends Component {
         this.position.setValue({ x: gesture.dx, y: gesture.dy });
       },
       onPanResponderRelease: (evt, gesture) => {
-        this.resetPostion();
+        if (gesture.dx > SWIPE_THRESHOLD) {
+          console.log('swip right');
+        } else if (gesture.dx < -SWIPE_THRESHOLD) {
+          console.log('sw left');
+        } else {
+          this.resetPostion();
+        }
       }
     });
   }
