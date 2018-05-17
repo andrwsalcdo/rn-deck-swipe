@@ -21,8 +21,16 @@ class Deck extends Component {
         // get dx & dy and move it to aniimated system
         this.position.setValue({ x: gesture.dx, y: gesture.dy });
       },
-      onPanResponderRelease: () => {}
+      onPanResponderRelease: (evt, gesture) => {
+        this.resetPostion();
+      }
     });
+  }
+
+  resetPostion() {
+    Animated.spring(this.position, {
+      toValue: { x: 0, y: 0 }
+    }).start();
   }
 
   getCardStyle() {
