@@ -5,8 +5,11 @@ import {
   StyleSheet,
   FlatList,
   Animated,
+  Dimensions,
   PanResponder
 } from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class Deck extends Component {
   constructor(props) {
@@ -22,6 +25,17 @@ class Deck extends Component {
     });
   }
 
+  getCardStyle() {
+    const rotate = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH * 1.5, 0, SCREEN_WIDTH * 1.5],
+      outputRange: ['-120deg', '0deg', '120deg']
+    });
+    return {
+      ...this.position.getLayout(),
+      transform: [{ rotate }]
+    };
+  }
+
   renderCards() {
     return this.props.data.map((item, i) => {
       if (i === 0) {
@@ -29,7 +43,7 @@ class Deck extends Component {
           <Animated.View
             key={item.id}
             {...this._panResponder.panHandlers}
-            style={this.position.getLayout()}
+            style={this.getCardStyle()}
           >
             {this.props.renderCard(item)}
           </Animated.View>
