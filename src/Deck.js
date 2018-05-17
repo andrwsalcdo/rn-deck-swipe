@@ -22,7 +22,7 @@ class Deck extends Component {
   constructor(props) {
     super(props);
     this.position = new Animated.ValueXY();
-    this._panResponder = new PanResponder.create({
+    this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderMove: (evt, gesture) => {
         // get dx & dy and move it to aniimated system
