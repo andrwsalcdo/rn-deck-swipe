@@ -79,7 +79,11 @@ class Deck extends Component {
 
   renderCards() {
     return this.props.data.map((item, i) => {
-      if (i === 0) {
+      if (i < this.state.index) {
+        return null;
+      }
+
+      if (i === this.state.index) {
         return (
           <Animated.View
             key={item.id}
