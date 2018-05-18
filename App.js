@@ -18,13 +18,11 @@ class App extends React.Component {
     return (
       <Container>
         <Header />
-        <Content>
-          <Deck
-            data={Data}
-            renderCard={this.renderCard}
-            noMoreCards={this.noMoreCards}
-          />
-        </Content>
+        <Deck
+          data={Data}
+          renderCard={this.renderCard}
+          noMoreCards={this.noMoreCards}
+        />
       </Container>
     );
   }
