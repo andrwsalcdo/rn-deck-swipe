@@ -6,6 +6,8 @@ import {
   FlatList,
   Animated,
   Dimensions,
+  LayoutAnimation,
+  UIManager,
   PanResponder
 } from 'react-native';
 
@@ -41,6 +43,12 @@ class Deck extends Component {
     this.state = {
       index: 0
     };
+  }
+
+  componentDidUpdate() {
+    UIManager.setLayoutAnimationEnabledExperimental &&
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    LayoutAnimation.spring();
   }
 
   forceSwipe(direction) {
@@ -101,7 +109,10 @@ class Deck extends Component {
         }
 
         return (
-          <Animated.View key={item.id} style={styles.cardStyle}>
+          <Animated.View
+            key={item.id}
+            style={[styles.cardStyle, { top: 10 * (i - this.state.index) }]}
+          >
             {this.props.renderCard(item)}
           </Animated.View>
         );
