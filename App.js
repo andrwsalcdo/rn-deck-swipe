@@ -11,12 +11,19 @@ class App extends React.Component {
       <DeckCard key={item.id} title={item.text} image={{ uri: item.uri }} />
     );
   };
+
+  noMoreCards = () => <Text>No more cards...</Text>;
+
   render() {
     return (
       <Container>
         <Header />
         <Content>
-          <Deck data={Data} renderCard={this.renderCard} />
+          <Deck
+            data={Data}
+            renderCard={this.renderCard}
+            noMoreCards={this.noMoreCards}
+          />
         </Content>
       </Container>
     );
